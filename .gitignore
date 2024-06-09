@@ -36,3 +36,6 @@ yarn-error.log*
 
 # json files
 .json
+/.vscode
+/database
+database/db.json
