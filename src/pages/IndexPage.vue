@@ -1,17 +1,28 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
+  <q-page padding>
+    <ListaReceitas :receitas="receitas" />
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import services from "src/services";
+import ListaReceitas from "src/components/ListaReceitas.vue";
 
-export default defineComponent({
-  name: 'IndexPage'
-});
+export default {
+  name: "IndexPage",
+  components: {
+    ListaReceitas,
+  },
+  data() {
+    return {
+      receitas: [],
+    };
+  },
+  created() {
+    services.receitas.getReceitas((receitas) => {
+      this.receitas = receitas;
+    });
+  },
+  methods: {},
+};
 </script>
