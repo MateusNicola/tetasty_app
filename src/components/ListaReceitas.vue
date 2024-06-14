@@ -57,7 +57,6 @@
           </li>
         </ol>
       </q-card-section>
-
       <q-separator />
     </q-card>
   </div>
