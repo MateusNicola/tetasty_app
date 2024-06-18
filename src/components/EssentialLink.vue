@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable tag="a" target="_blank" :href="link">
+  <q-item clickable tag="a" target="_blank" @click="onClick">
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
@@ -35,6 +35,11 @@ export default defineComponent({
     icon: {
       type: String,
       default: "",
+    },
+  },
+  methods: {
+    onClick() {
+      this.$emit("minhas receitas");
     },
   },
 });

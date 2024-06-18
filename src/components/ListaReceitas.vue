@@ -38,6 +38,7 @@
           </div>
         </div>
       </q-card-section>
+      <q-separator />
       <q-card-section>
         <div class="text-subtitle2">Rendimento: {{ receita.rendimento }}</div>
         <div class="text-subtitle1">Ingredientes:</div>
@@ -56,6 +57,17 @@
             {{ passo.descricao }}
           </li>
         </ol>
+        <q-separator />
+        <div class="text-subtitle1">Tags:</div>
+        <div>
+          <q-badge
+            v-for="tag in receita.tags"
+            :key="tag.tag"
+            outline
+            color="primary"
+            :label="tag.tag"
+          />
+        </div>
       </q-card-section>
       <q-separator />
     </q-card>
@@ -73,6 +85,7 @@ export default {
   },
 };
 </script>
+
 <style lang="sass" scoped>
 .my-card
   width: 100%

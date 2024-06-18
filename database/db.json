@@ -4,6 +4,8 @@
       "nome": "Bolo de Chocolate",
       "favorita": true,
       "rendimento": "12 porções",
+      "classificacao": 5,
+      "tags": [{ "tag": "bolo" }, { "tag": "chocolate" }],
       "ingredientes": [
         {
           "quantidade": 2,
@@ -92,6 +94,8 @@
       "nome": "Brigadeiro",
       "favorita": true,
       "rendimento": "20 unidades",
+      "classificacao": 4.5,
+      "tags": [{ "tag": "brigadeiro" }, { "tag": "chocolate" }],
       "ingredientes": [
         {
           "quantidade": 1,

@@ -1,12 +1,17 @@
 <template>
-  <q-page padding> </q-page>
+  <q-page padding>
+    <ListaReceitas :receitas="receitas" />
+  </q-page>
 </template>
-
 <script>
 import services from "src/services";
+import ListaReceitas from "src/components/ListaReceitas.vue";
 
 export default {
-  name: "IndexPage",
+  name: "ListaReceitaPage",
+  components: {
+    ListaReceitas,
+  },
   data() {
     return {
       receitas: [],
@@ -20,3 +25,4 @@ export default {
   methods: {},
 };
 </script>
+<style></style>

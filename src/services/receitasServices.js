@@ -21,28 +21,6 @@ const receitasServices = {
         });
       });
   },
-
-  addReceita: (novaReceita, callback) => {
-    jsonAPI
-      .post("receitas", novaReceita)
-      .then((retorno) => {
-        callback(retorno.data);
-        Notify.create({
-          message: "Receita adicionada com sucesso!",
-          color: "positive",
-          position: "bottom",
-          timeout: 3000,
-        });
-      })
-      .catch((erro) => {
-        Notify.create({
-          message: erro.message,
-          color: "negative",
-          position: "bottom",
-          timeout: 3000,
-        });
-      });
-  },
 };
 
 export default receitasServices;
