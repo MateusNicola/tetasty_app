@@ -8,9 +8,6 @@
               <q-item clickable v-close-popup to="/MinhasReceitas">
                 <q-item-section>Minhas receitas</q-item-section>
               </q-item>
-              <q-item clickable v-close-popup>
-                <q-item-section>Sobre</q-item-section>
-              </q-item>
             </q-list>
           </q-menu>
         </q-btn>
@@ -29,36 +26,9 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
-
-const linksList = [
-  {
-    title: "Minha receitas",
-    caption: "",
-    icon: "blender",
-    link: "",
-  },
-  {
-    title: "Sobre",
-    caption: "",
-    icon: "contact_page",
-    link: "",
-  },
-];
 
 export default defineComponent({
   name: "MainLayout",
-  data() {
-    return {
-      linksList,
-      leftDrawerOpen: false,
-    };
-  },
-
-  methods: {
-    toggleLeftDrawer() {
-      this.leftDrawerOpen = !this.leftDrawerOpen;
-    },
-  },
+  methods: {},
 });
 </script>

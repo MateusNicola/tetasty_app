@@ -3,20 +3,7 @@
 </template>
 
 <script>
-import services from "src/services";
-
 export default {
   name: "IndexPage",
-  data() {
-    return {
-      receitas: [],
-    };
-  },
-  created() {
-    services.receitas.getReceitas((receitas) => {
-      this.receitas = receitas;
-    });
-  },
-  methods: {},
 };
 </script>

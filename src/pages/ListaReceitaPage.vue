@@ -1,6 +1,7 @@
 <template>
+  <q-btn class="q-ma-md" to="/CadastroReceita">Criar nova receita</q-btn>
   <q-page padding>
-    <ListaReceitas :receitas="receitas" />
+    <ListaReceitas :receitas="receitas" @excluirReceita="ListarReceitas" />
   </q-page>
 </template>
 <script>
@@ -18,11 +19,15 @@ export default {
     };
   },
   created() {
-    services.receitas.getReceitas((receitas) => {
-      this.receitas = receitas;
-    });
+    this.ListarReceitas();
   },
-  methods: {},
+  methods: {
+    ListarReceitas() {
+      services.receitas.getReceitas((receitas) => {
+        this.receitas = receitas;
+      });
+    },
+  },
 };
 </script>
 <style></style>

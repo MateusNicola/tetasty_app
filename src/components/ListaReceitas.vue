@@ -3,7 +3,7 @@
     <q-card
       flat
       bordered
-      class="my-card"
+      class="card"
       :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-2'"
       v-for="receita in receitas"
       :key="receita.nome"
@@ -12,9 +12,18 @@
         <div class="row items-center no-wrap">
           <div class="col">
             <div class="text-h6">
-              {{ receita.nome }}
+              {{ receita.titulo }}
               <q-icon
                 :name="receita.favorita ? 'favorite' : 'favorite_border'"
+              />
+              <br />
+              <q-rating
+                size="1em"
+                color="primary"
+                icon="star_border"
+                icon-selected="star"
+                v-model="receita.classificacao"
+                readonly
               />
             </div>
           </div>
@@ -22,7 +31,7 @@
             <q-btn color="grey-7" round flat icon="more_vert">
               <q-menu cover auto-close>
                 <q-list>
-                  <q-item clickable>
+                  <q-item clickable @click="() => excluirReceita(receita)">
                     <q-item-section avatar>
                       <q-icon color="black" name="delete" />
                     </q-item-section>
@@ -40,34 +49,21 @@
       </q-card-section>
       <q-separator />
       <q-card-section>
-        <div class="text-subtitle2">Rendimento: {{ receita.rendimento }}</div>
-        <div class="text-subtitle1">Ingredientes:</div>
-        <ul>
-          <li
-            v-for="ingrediente in receita.ingredientes"
-            :key="ingrediente.item"
-          >
-            {{ ingrediente.quantidade }} {{ ingrediente.unidade }} de
-            {{ ingrediente.item }}
-          </li>
-        </ul>
-        <div class="text-subtitle1">Modo de Preparo:</div>
-        <ol>
-          <li v-for="passo in receita.modoPreparo" :key="passo.passo">
-            {{ passo.descricao }}
-          </li>
-        </ol>
-        <q-separator />
-        <div class="text-subtitle1">Tags:</div>
-        <div>
-          <q-badge
-            v-for="tag in receita.tags"
-            :key="tag.tag"
-            outline
-            color="primary"
-            :label="tag.tag"
-          />
+        <div class="text-subtitle1">
+          <b>Rendimento: </b>{{ receita.rendimento }}
         </div>
+        <div class="text-subtitle1"><b>Ingredientes:</b></div>
+        <div
+          class="text-subtitle1"
+          v-html="formatText(receita.ingredientes)"
+        ></div>
+        <div class="text-subtitle1"><b>Modo de preparo</b></div>
+        <div
+          class="text-subtitle1"
+          v-html="formatText(receita.modoPreparo)"
+        ></div>
+        <q-separator />
+        <div class="text-subtitle1"><b>Tags:</b> <br />{{ receita.tags }}</div>
       </q-card-section>
       <q-separator />
     </q-card>
@@ -75,18 +71,32 @@
 </template>
 
 <script>
+import services from "src/services";
+
 export default {
   name: "ListaReceitas",
+  emits: ["excluirReceita"],
   props: {
     receitas: {
       type: Array,
       required: true,
     },
   },
+  methods: {
+    formatText(text) {
+      return text.replace(/\n/g, "<br>");
+    },
+    excluirReceita(receita) {
+      services.receitas.deleteReceita(receita.id, (data) => {
+        this.$emit("excluirReceita", receita.id);
+      });
+    },
+  },
 };
 </script>
 
-<style lang="sass" scoped>
-.my-card
-  width: 100%
+<style>
+.card {
+  width: 100%;
+}
 </style>
