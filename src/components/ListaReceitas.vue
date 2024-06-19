@@ -31,15 +31,14 @@
             <q-btn color="grey-7" round flat icon="more_vert">
               <q-menu cover auto-close>
                 <q-list>
-                  <q-item clickable @click="() => excluirReceita(receita)">
-                    <q-item-section avatar>
-                      <q-icon color="black" name="delete" />
-                    </q-item-section>
+                  <q-item clickable @click="editarReceita(receita)">
+                    <q-item-section avatar> Editar </q-item-section>
+                  </q-item>
+                  <q-item clickable @click="excluirReceita(receita)">
+                    <q-item-section avatar> Excluir </q-item-section>
                   </q-item>
                   <q-item clickable>
-                    <q-item-section avatar>
-                      <q-icon color="black" name="share" />
-                    </q-item-section>
+                    <q-item-section avatar> Compartilhar </q-item-section>
                   </q-item>
                 </q-list>
               </q-menu>
@@ -91,6 +90,7 @@ export default {
         this.$emit("excluirReceita", receita.id);
       });
     },
+    editarReceita(receita) {},
   },
 };
 </script>
