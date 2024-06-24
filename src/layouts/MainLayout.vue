@@ -3,8 +3,6 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title> TeTasty </q-toolbar-title>
-
-        <div></div>
       </q-toolbar>
     </q-header>
 
@@ -15,10 +13,15 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "MainLayout",
   methods: {},
 });
 </script>
+<style>
+.q-page-container {
+  background-color: lightgray;
+}
+</style>

@@ -1,12 +1,17 @@
 <template>
   <q-card class="q-ma-lg q-pa-md">
     <h5>Cadastro Receita</h5>
-    <FormReceita @salvarReceita="onSalvarReceita" :receita="receita" />
+    <FormReceita
+      @salvarReceita="onSalvarReceita"
+      :receita="receitasStore.receita"
+    />
   </q-card>
 </template>
 <script>
-import FormReceita from "../components/FormReceita.vue";
+import FormReceita from "src/components/FormReceita.vue";
 import services from "src/services";
+import receitasStore from "src/stores/receitasStore.js";
+
 export default {
   name: "CadastroReceitaPage",
   components: {

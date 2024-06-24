@@ -1,8 +1,10 @@
 import { Notify } from "quasar";
 import receitasServices from "./receitasServices";
+import usuariosServices from "./usuarioServices";
 
 const services = {
   receitas: receitasServices,
+  usuarios: usuariosServices,
   mensagem: (msg) => {
     Notify.create({
       message: msg,

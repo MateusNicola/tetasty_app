@@ -2,6 +2,7 @@
   "receitas": [
     {
       "id": "6362",
+      "idUsuario": "dP4XQQjIptQqfIwZi9ZuR7wpz8k2",
       "titulo": "Bolo de chocolate",
       "favorita": true,
       "rendimento": "12 fatias",
@@ -9,6 +10,40 @@
       "tags": "bolo, chocolate, nescau",
       "ingredientes": "- 2 xícaras de farinha\n- 1 e 1/2 de açúcar\n- 4 ovos\n- 1 xícara de Nescau\n- 1/4 de xícara de óleo\n- 1 xícara de água fervente\n- 1/2 de chá de fermento",
       "modoPreparo": "- Coloque a farinha, o açúcar e o Nescau em um recipiente e misture.\n- Adicione 4 ovos e o óleo, e misture novamente até ficar homogêneo.\n- Adicione a água fervente rapidamente enquanto mexe a massa.\n- Adicione a fermento e coloque em uma forma untada."
+    },
+    {
+      "id": "1e24",
+      "idUsuario": "JuBa4Xz9CfgPW2TOGP95NbjmYbb2",
+      "titulo": "Café solúvel",
+      "favorita": false,
+      "rendimento": "1 porção",
+      "classificacao": 5,
+      "tags": "café, manhã, sol",
+      "ingredientes": "- 2 colheres de chá de açucar\n- 1 colher de chá de café solúvel\n- 200ml de leite",
+      "modoPreparo": "- Misture o açucar e o café, e adicione um pouco de leite e misture bem.\n- Após adicionar o restante do leite e misture bem."
+    },
+    {
+      "id": "572a",
+      "idUsuario": "JuBa4Xz9CfgPW2TOGP95NbjmYbb2",
+      "titulo": "Arroz",
+      "favorita": true,
+      "rendimento": "500g",
+      "classificacao": 5,
+      "tags": "arroz, soltinho",
+      "ingredientes": "- 2 xícaras de arroz\n- 4 xícaras de água\n- Sal a gosto",
+      "modoPreparo": "Em panela média, frite o arroz.\n- Após adicionar a água."
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "dP4XQQjIptQqfIwZi9ZuR7wpz8k2",
+      "nome": "Nicola Mateus de Oliveira",
+      "email": "mateus.nicola@hotmail.com"
+    },
+    {
+      "id": "JuBa4Xz9CfgPW2TOGP95NbjmYbb2",
+      "nome": "Mateus Nicola",
+      "email": "nicolamateus@gmail.com"
     }
   ]
 }

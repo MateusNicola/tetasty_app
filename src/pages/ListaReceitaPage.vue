@@ -1,6 +1,7 @@
 <template>
-  <q-btn class="q-ma-md" to="/CadastroReceita">Criar nova receita</q-btn>
-  <q-page padding>
+  <q-btn class="q-ma-sm" to="/CadastroReceita">Criar nova receita</q-btn>
+  <q-page class="q-pa-md">
+    <h4>Minhas receitas</h4>
     <ListaReceitas :receitas="receitas" @excluirReceita="ListarReceitas" />
   </q-page>
 </template>

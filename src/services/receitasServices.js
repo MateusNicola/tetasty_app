@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Notify } from "quasar";
+import usuarioStore from "src/stores/usuarioStore.js";
 
 const jsonAPI = axios.create({
   baseURL: process.env.URL,
@@ -7,10 +8,15 @@ const jsonAPI = axios.create({
 
 const receitasServices = {
   getReceitas: (callback) => {
+    const idUsuario = usuarioStore.idUsuario;
+
     jsonAPI
       .get("receitas")
       .then((retorno) => {
-        callback(retorno.data);
+        const receitasFiltradas = retorno.data.filter(
+          (receita) => receita.idUsuario === idUsuario
+        );
+        callback(receitasFiltradas);
       })
       .catch((erro) => {
         Notify.create({
@@ -21,7 +27,6 @@ const receitasServices = {
         });
       });
   },
-
   saveReceita(receita) {
     jsonAPI
       .post("receitas", receita)
@@ -42,7 +47,6 @@ const receitasServices = {
         });
       });
   },
-
   deleteReceita(id, callback) {
     jsonAPI
       .delete(`receitas/${id}`)

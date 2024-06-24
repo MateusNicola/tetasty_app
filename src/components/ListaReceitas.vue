@@ -71,6 +71,7 @@
 
 <script>
 import services from "src/services";
+import receitasStore from "src/stores/receitasStore.js";
 
 export default {
   name: "ListaReceitas",
@@ -90,7 +91,10 @@ export default {
         this.$emit("excluirReceita", receita.id);
       });
     },
-    editarReceita(receita) {},
+    editarReceita(receita) {
+      receitasStore.receita = receita;
+      console.log(receitasStore.receita);
+    },
   },
 };
 </script>

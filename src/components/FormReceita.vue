@@ -23,13 +23,22 @@
           indeterminate-icon="star_border"
         />
       </div>
-      <q-input
-        label="Rendimento"
-        clearable
-        square
-        outlined
-        v-model="receitaModel.rendimento"
-      />
+      <div class="container2" style="max-width: 100%">
+        <q-input
+          label="Rendimento"
+          clearable
+          square
+          outlined
+          v-model="receitaModel.rendimento"
+        />
+        <q-input
+          label="Tempo de preparo"
+          clearable
+          square
+          outlined
+          v-model="receitaModel.tempoPreparo"
+        />
+      </div>
       <br />
       <q-input
         label="Ingredientes"
@@ -75,6 +84,7 @@
 
 <script>
 import services from "src/services";
+import usuarioStore from "src/stores/usuarioStore.js";
 
 export default {
   name: "FormCadastroReceita",
@@ -82,21 +92,29 @@ export default {
   props: {
     receita: {
       type: Object,
-      default: () => null,
+      required: false,
+      default: () => ({}),
     },
   },
   data() {
     return {
       receitaModel: {
+        idUsuario: usuarioStore.idUsuario,
         titulo: "",
         favorita: false,
         rendimento: "",
+        tempoPreparo: "",
         classificacao: 0,
         tags: [],
         ingredientes: "",
         modoPreparo: "",
       },
     };
+  },
+  computed: {
+    receitaObj() {
+      return JSON.parse(this.receita);
+    },
   },
   methods: {
     salvar() {
@@ -113,6 +131,11 @@ export default {
 .container {
   display: grid;
   grid-template-columns: repeat(2, 95%);
+  gap: 5px;
+}
+.container2 {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
   gap: 5px;
 }
 </style>

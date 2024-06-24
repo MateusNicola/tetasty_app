@@ -13,6 +13,7 @@ const routes = [
   },
   {
     path: "/CadastroReceita",
+    props: true,
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/CadastroReceitaPage.vue") },

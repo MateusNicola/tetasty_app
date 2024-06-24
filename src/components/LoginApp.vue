@@ -39,21 +39,21 @@
         <q-card-section class="text-h6"> Cadastro </q-card-section>
         <q-card-section>
           <q-input
-            v-model="LoginModel.Nome"
+            v-model="CadastroModel.nome"
             class="q-pa-sm"
             label="Nome"
             type="text"
             outlined
           />
           <q-input
-            v-model="LoginModel.email"
+            v-model="CadastroModel.email"
             class="q-pa-sm"
             label="Email"
             type="email"
             outlined
           />
           <q-input
-            v-model="LoginModel.senha"
+            v-model="CadastroModel.senha"
             class="q-pa-sm"
             label="Senha"
             type="password"
@@ -72,12 +72,18 @@
 <script>
 import services from "src/services";
 import firebaseServices from "src/services/firebase";
+import userStore from "src/stores/usuarioStore.js";
 
 export default {
   name: "LoginApp",
   data() {
     return {
       LoginModel: {
+        email: "",
+        senha: "",
+      },
+      CadastroModel: {
+        id: "",
         nome: "",
         email: "",
         senha: "",
@@ -91,7 +97,8 @@ export default {
         this.LoginModel.email,
         this.LoginModel.senha,
         (user) => {
-          services.mensagem("Usuário logado com sucesso " + user.uid);
+          services.mensagem("Bem-vindo usuário: " + user.uid);
+          userStore.idUsuario = user.uid;
           this.$router.push("/MinhasReceitas");
         }
       );
@@ -101,10 +108,15 @@ export default {
     },
     criarLogin() {
       firebaseServices.criarUsuarioComEmailSenha(
-        this.LoginModel.email,
-        this.LoginModel.senha,
+        this.CadastroModel.email,
+        this.CadastroModel.senha,
         (user) => {
           services.mensagem("Usuário criado com sucesso " + user.uid);
+          services.usuarios.saveUsuario(
+            user.uid,
+            this.CadastroModel.nome,
+            this.CadastroModel.email
+          );
         }
       );
     },
