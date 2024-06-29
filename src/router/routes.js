@@ -13,14 +13,28 @@ const routes = [
   },
   {
     path: "/CadastroReceita",
-    props: true,
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("pages/CadastroReceitaPage.vue") },
+      {
+        path: "",
+        name: "CadastroReceita",
+        props: true,
+        component: () => import("pages/CadastroReceitaPage.vue"),
+      },
     ],
   },
-  // Always leave this as last one,
-  // but you can also remove it
+  {
+    path: "/EditarReceita/:id",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "EditarReceita",
+        props: true,
+        component: () => import("pages/EditarReceitaPage.vue"),
+      },
+    ],
+  },
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),

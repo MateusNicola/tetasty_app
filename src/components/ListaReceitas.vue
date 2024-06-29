@@ -37,9 +37,6 @@
                   <q-item clickable @click="excluirReceita(receita)">
                     <q-item-section avatar> Excluir </q-item-section>
                   </q-item>
-                  <q-item clickable>
-                    <q-item-section avatar> Compartilhar </q-item-section>
-                  </q-item>
                 </q-list>
               </q-menu>
             </q-btn>
@@ -50,6 +47,9 @@
       <q-card-section>
         <div class="text-subtitle1">
           <b>Rendimento: </b>{{ receita.rendimento }}
+        </div>
+        <div class="text-subtitle1">
+          <b>Tempo de preparo: </b>{{ receita.tempoPreparo }}
         </div>
         <div class="text-subtitle1"><b>Ingredientes:</b></div>
         <div
@@ -71,7 +71,6 @@
 
 <script>
 import services from "src/services";
-import receitasStore from "src/stores/receitasStore.js";
 
 export default {
   name: "ListaReceitas",
@@ -92,8 +91,11 @@ export default {
       });
     },
     editarReceita(receita) {
-      receitasStore.receita = receita;
-      console.log(receitasStore.receita);
+      this.$router.push({
+        name: "EditarReceita",
+        params: { id: receita.id },
+      });
+      console.log(receita);
     },
   },
 };

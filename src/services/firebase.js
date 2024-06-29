@@ -21,39 +21,64 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+const handleFirebaseError = (error) => {
+  let message;
+  console.log(error.code);
+  switch (error.code) {
+    case "auth/email-already-in-use":
+      message = "Este e-mail já está em uso. Por favor, tente outro e-mail.";
+      break;
+    case "auth/invalid-email":
+      message = "O e-mail fornecido é inválido. Verifique e tente novamente.";
+      break;
+    case "auth/weak-password":
+      message =
+        "A senha é muito fraca. Por favor, escolha uma senha mais forte.";
+      break;
+    case "auth/user-not-found":
+      message =
+        "Usuário não encontrado. Verifique suas credenciais e tente novamente.";
+      break;
+    case "auth/wrong-password":
+      message = "Senha incorreta. Por favor, tente novamente.";
+      break;
+    case "auth/popup-closed-by-user":
+      message =
+        "A janela de autenticação foi fechada antes de completar o login. Tente novamente.";
+      break;
+    default:
+      message =
+        "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.";
+      break;
+  }
+  return message;
+};
+
 const firebaseServices = {
   criarUsuarioComEmailSenha: (email, senha, callback) => {
     createUserWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => {
-        // Signed up
         const user = userCredential.user;
         if (callback) {
           callback(user);
         }
-        // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ..
+        const errorMessage = handleFirebaseError(error);
+        services.mensagemErro(errorMessage);
       });
   },
   loginComEmailSenha: (email, senha, callback) => {
     signInWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        console.log(user);
         if (callback) {
           callback(user);
         }
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        services.mensagemErro("Usuário não cadastrado." + errorMessage);
+        const errorMessage = handleFirebaseError(error);
+        services.mensagemErro(errorMessage);
       });
   },
   loginComGoogle: (callback) => {
@@ -65,29 +90,21 @@ const firebaseServices = {
         }
       })
       .catch((error) => {
-        // Handle Errors here.
-        console.log(error);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        const errorMessage = handleFirebaseError(error);
         services.mensagemErro(errorMessage);
-        // ...
       });
   },
   salvarUsuario: (uid, email, callback) => {
     let refUser = ref(database, `usuarios/${uid}`);
     set(refUser, { uid: uid, email: email })
       .then(() => {
-        services.mensagem("Usuario salvo com sucesso");
+        services.mensagem("Usuário salvo com sucesso");
         if (callback) {
           callback();
         }
       })
       .catch((error) => {
-        services.mensagemErro("Erro ao salvar o usuario: " + error);
+        services.mensagemErro("Erro ao salvar o usuário: " + error);
       });
   },
 };

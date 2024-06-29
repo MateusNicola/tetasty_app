@@ -16,7 +16,6 @@ const usuariosServices = {
       .get(`usuarios?email=${encodeURIComponent(email)}`)
       .then((response) => {
         if (response.data.length > 0) {
-          // Usuário já existe
           Notify.create({
             message: "Usuário com esse email já existe",
             color: "negative",

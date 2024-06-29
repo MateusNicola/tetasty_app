@@ -1,5 +1,5 @@
 <template>
-  <q-form ref="form">
+  <q-form ref="form" @submit="salvar">
     <div class="q-gutter-sm" style="max-width: 100%">
       <q-rating
         v-model="receitaModel.classificacao"
@@ -15,6 +15,7 @@
           square
           outlined
           v-model="receitaModel.titulo"
+          :rules="[validaTitulo]"
         />
         <q-checkbox
           v-model="receitaModel.favorita"
@@ -30,6 +31,7 @@
           square
           outlined
           v-model="receitaModel.rendimento"
+          :rules="[validaRendimento]"
         />
         <q-input
           label="Tempo de preparo"
@@ -37,6 +39,7 @@
           square
           outlined
           v-model="receitaModel.tempoPreparo"
+          :rules="[validaTempoPreparo]"
         />
       </div>
       <br />
@@ -49,6 +52,7 @@
         v-model="receitaModel.ingredientes"
         filled
         autogrow
+        :rules="[validaIngredientes]"
       />
       <br />
       <q-input
@@ -60,6 +64,7 @@
         v-model="receitaModel.modoPreparo"
         filled
         autogrow
+        :rules="[validaModoPreparo]"
       />
       <br />
       <q-input
@@ -111,17 +116,43 @@ export default {
       },
     };
   },
-  computed: {
-    receitaObj() {
-      return JSON.parse(this.receita);
+  watch: {
+    receita: {
+      handler(newVal) {
+        if (newVal) {
+          this.receitaModel = { ...this.receitaModel, ...newVal };
+        }
+      },
+      immediate: true,
+      deep: true,
     },
   },
   methods: {
+    validaTitulo(val) {
+      return val || "Título é obrigatório";
+    },
+    validaRendimento(val) {
+      return val || "Rendimento é obrigatório";
+    },
+    validaTempoPreparo(val) {
+      return val || "Tempo de preparo é obrigatório";
+    },
+    validaIngredientes(val) {
+      return val || "Ingredientes são obrigatórios";
+    },
+    validaModoPreparo(val) {
+      return val || "Modo de preparo é obrigatório";
+    },
     salvar() {
-      services.receitas.saveReceita(this.receitaModel);
+      if (this.$refs.form.validate()) {
+        services.receitas.saveReceita(this.receitaModel);
+      }
     },
     salvarESair() {
-      services.receitas.saveReceita(this.receitaModel);
+      if (!this.$refs.form.validate()) {
+        services.receitas.saveReceita(this.receitaModel);
+        this.$router.push("/MinhasReceitas");
+      }
     },
   },
 };

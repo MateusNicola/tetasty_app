@@ -1,6 +1,6 @@
 import { Notify } from "quasar";
 import receitasServices from "./receitasServices";
-import usuariosServices from "./usuarioServices";
+import usuariosServices from "./usuariosServices";
 
 const services = {
   receitas: receitasServices,
