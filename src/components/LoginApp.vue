@@ -132,7 +132,7 @@ export default {
       );
     },
     validaNome(val) {
-      return (val && val.trim().indexOf(" ") === -1) || "Nome é obrigatório.";
+      return (val && val.trim().indexOf(" ") !== -1) || "Nome é obrigatório.";
     },
     togglePassword() {
       this.showPassword = !this.showPassword;
