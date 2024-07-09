@@ -129,19 +129,19 @@ export default {
   },
   methods: {
     validaTitulo(val) {
-      return val || "Título é obrigatório";
+      return val ? true : "Título é obrigatório";
     },
     validaRendimento(val) {
-      return val || "Rendimento é obrigatório";
+      return val ? true : "Rendimento é obrigatório";
     },
     validaTempoPreparo(val) {
-      return val || "Tempo de preparo é obrigatório";
+      return val ? true : "Tempo de preparo é obrigatório";
     },
     validaIngredientes(val) {
-      return val || "Ingredientes são obrigatórios";
+      return val ? true : "Ingredientes são obrigatórios";
     },
     validaModoPreparo(val) {
-      return val || "Modo de preparo é obrigatório";
+      return val ? true : "Modo de preparo é obrigatório";
     },
     salvar() {
       if (this.$refs.form.validate()) {
@@ -149,7 +149,7 @@ export default {
       }
     },
     salvarESair() {
-      if (!this.$refs.form.validate()) {
+      if (this.$refs.form.validate()) {
         services.receitas.saveReceita(this.receitaModel);
         this.$router.push("/MinhasReceitas");
       }
